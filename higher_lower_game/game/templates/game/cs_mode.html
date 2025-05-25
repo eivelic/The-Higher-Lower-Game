@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>CS Mode - Odabir težine</title></head>
+<body>
+    <h1>Computer Science Mode</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label>Odaberi težinu:</label><br>
+        <select name="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+        <button type="submit">Start</button>
+    </form>
+    <p><a href="{% url 'homepage' %}">Nazad na početak</a></p>
+</body>
+</html>

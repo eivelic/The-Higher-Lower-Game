@@ -1,0 +1,18 @@
+<!-- game/templates/game/homepage.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Higher-Lower Game</title>
+</head>
+<body>
+    <h1>Dobrodošli u Higher-Lower Game!</h1>
+    
+    <h2>Odaberi mod igre:</h2>
+    <ul>
+        <li><a href="{% url 'classic_mode' %}">🎮 Classic Mode (popularnost pretraga)</a></li>
+        <li><a href="{% url 'cs_mode' %}">🧠 CS Mode (računarstvo)</a></li>
+    </ul>
+</body>
+</html>

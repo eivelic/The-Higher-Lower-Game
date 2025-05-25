@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>CS Mode - Rezultat</title></head>
+<body>
+    <h1>Rezultat igre</h1>
+    <p>Vaš rezultat: {{ score }}</p>
+    <p>Najbolji rezultat: {{ best_score }}</p>
+    <p><a href="{% url 'cs_mode' %}">Igraj ponovno</a></p>
+    <p><a href="{% url 'homepage' %}">Nazad na početak</a></p>
+</body>
+</html>

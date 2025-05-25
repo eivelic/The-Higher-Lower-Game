@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>CS Mode - Igra</title></head>
+<body>
+    <h1>CS Mode</h1>
+    <p>Pitanje: {{ question.question_text }}</p>
+    <p>Je li pravi odgovor veći ili manji od: <strong>{{ given_number }}</strong>?</p>
+    <p>Trenutni rezultat: {{ score }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="choice" value="higher">Veće</button>
+        <button type="submit" name="choice" value="lower">Manje</button>
+    </form>
+
+    <p><a href="{% url 'cs_mode' %}">Odaberi drugu težinu</a></p>
+    <p><a href="{% url 'homepage' %}">Nazad na početak</a></p>
+</body>
+</html>
