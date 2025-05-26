@@ -1,19 +1,26 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
-<head><meta charset="UTF-8"><title>CS Mode - Igra</title></head>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'game/css/cs_mode.css' %}">
+    <title>CS Mode - Igra</title>
+</head>
 <body>
-    <h1>CS Mode</h1>
-    <p>Pitanje: {{ question.question_text }}</p>
-    <p>Je li pravi odgovor veći ili manji od: <strong>{{ given_number }}</strong>?</p>
-    <p>Trenutni rezultat: {{ score }}</p>
+    <div class="cs-play-container">
+        <h1 class="cs-title">CS Mode</h1>
+        <p class="cs-question">Pitanje: {{ question.question_text }}</p>
+        <p class="cs-question">Je li pravi odgovor veći ili manji od: <strong>{{ given_number }}</strong>?</p>
+        <p class="cs-score">Trenutni rezultat: {{ score }}</p>
 
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit" name="choice" value="higher">Veće</button>
-        <button type="submit" name="choice" value="lower">Manje</button>
-    </form>
+        <form method="post" class="cs-answer-buttons">
+            {% csrf_token %}
+            <button type="submit" name="choice" value="higher">Veće</button>
+            <button type="submit" name="choice" value="lower">Manje</button>
+        </form>
 
-    <p><a href="{% url 'cs_mode' %}">Odaberi drugu težinu</a></p>
-    <p><a href="{% url 'homepage' %}">Nazad na početak</a></p>
+        <p><a href="{% url 'cs_mode' %}" class="cs-link">Odaberi drugu težinu</a></p>
+        <p><a href="{% url 'homepage' %}" class="cs-link">Nazad na početak</a></p>
+    </div>
 </body>
 </html>

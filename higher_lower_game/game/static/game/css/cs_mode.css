@@ -1,0 +1,103 @@
+/* Container s dva stupca */
+.cs-container {
+  display: flex;
+  max-width: 900px;
+  width: 100%;
+  height: 480px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+/* Lijevi stupac sa sadržajem */
+.cs-left {
+  flex: 1 1 55%;
+  padding: 2.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Desni stupac za pozadinsku sliku */
+.cs-right {
+  flex: 1 1 45%;
+  background-image: url('/static/game/images/your-image.jpg'); /* Stavi svoju putanju slike ovdje */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Naslov */
+.cs-title {
+  font-weight: 700;
+  font-size: 2rem;
+  color: #222;
+  margin-bottom: 1.5rem;
+}
+
+/* Form elementi */
+.cs-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.cs-label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.cs-select {
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  transition: border-color 0.3s ease;
+}
+
+.cs-select:focus {
+  border-color: #3f51b5;
+  outline: none;
+}
+
+.cs-button {
+  padding: 0.75rem;
+  font-size: 1rem;
+  background-color: #3f51b5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background-color 0.3s ease;
+}
+
+.cs-button:hover {
+  background-color: #2c3e9f;
+}
+
+.cs-link {
+  margin-top: 1.25rem;
+  color: #3f51b5;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.cs-link:hover {
+  color: #1a237e;
+}
+
+/* Responsive za manje ekrane */
+@media (max-width: 720px) {
+  .cs-container {
+    flex-direction: column;
+    height: auto;
+  }
+  .cs-right {
+    height: 220px;
+    flex-basis: auto;
+  }
+}
