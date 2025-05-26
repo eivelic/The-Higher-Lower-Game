@@ -6,24 +6,20 @@
     <link rel="stylesheet" href="{% static 'game/css/cs_mode.css' %}">
     <title>CS Mode - Odabir težine</title>
 </head>
-<body id="cs-mode-selection">
-  <div class="cs-container">
-    <div class="cs-left">
-      <h1 class="cs-title">Computer Science Mode</h1>
-      <form method="post" class="cs-form">
-          {% csrf_token %}
-          <label for="difficulty" class="cs-label">Odaberi težinu:</label><br>
-          <select name="difficulty" id="cs-difficulty-select" class="cs-select">
-              <option value="easy">Easy</option>
-              <option value="medium">Medium</option>
-              <option value="hard">Hard</option>
-          </select>
-          <button type="submit" class="cs-button">Start</button>
-      </form>
-      <p><a href="{% url 'homepage' %}" class="cs-link">Nazad na početak</a></p>
-    </div>
-    <div class="cs-right"></div>
+<body>
+  <div class="cs-container" id="cs-mode-selection">
+    <h1 class="cs-title">Computer Science Mode</h1>
+    <form method="post" class="cs-form">
+      {% csrf_token %}
+      <label for="difficulty" class="cs-label">Odaberi težinu:</label><br>
+      <select name="difficulty" id="cs-difficulty-select" class="cs-select">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+      </select>
+      <button type="submit" class="cs-button">Start</button>
+    </form>
+    <p><a href="{% url 'homepage' %}" class="cs-link">Nazad na početak</a></p>
   </div>
 </body>
 </html>
-
