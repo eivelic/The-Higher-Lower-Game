@@ -1,18 +1,56 @@
-<!-- game/templates/game/homepage.html -->
-
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Higher-Lower Game</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&family=Roboto:ital,wght@0,700;1,500&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{% static 'game/css/homepage.css' %}" />
 </head>
-<body>
-    <h1>Dobrodošli u Higher-Lower Game!</h1>
-    
-    <h2>Odaberi mod igre:</h2>
-    <ul>
-        <li><a href="{% url 'classic_mode' %}">🎮 Classic Mode (popularnost pretraga)</a></li>
-        <li><a href="{% url 'cs_mode' %}">🧠 CS Mode (računarstvo)</a></li>
-    </ul>
+<body id="homepage-body">
+
+    <!-- Pozadinska slika -->
+    <div class="background-image"></div>
+
+    <!-- Glavni container s poluprozirnom pozadinom -->
+    <div class="homepage-container">
+        <img src="{% static 'game/images/higher_lower.jpg' %}" alt="Higher-Lower Banner" class="homepage-image"/>
+        <ul class="mode-list">
+            <li><a href="{% url 'classic_mode' %}" class="mode-link-2">Classic</a></li>
+            <li><a href="{% url 'cs_mode' %}" class="mode-link">Computer Science</a></li>
+        </ul>
+
+        <section class="rules-box">
+            <h3 class="rules-title">Pravila igre</h3>
+            <div class="rules-section">
+                <div class="rules-header">
+                    <h4 class="rules-subtitle">Classic</h4>
+                    <img src="{% static 'game/images/classic-icon.png' %}" alt="Classic Mode Icon" class="rules-icon"/>
+                </div>
+                <p class="rules-text">
+                    Igra ti prikazuje dva pojma – tvoj zadatak je pogoditi koji od njih ima veći broj mjesečnih Google pretraga. 
+                    Pogađaj točno što više puta zaredom da bi ostvario najbolji rezultat!
+                </p>
+            </div>
+
+        <div class="rules-section">
+            <div class="rules-header">
+                <h4 class="rules-subtitle">Computer Science</h4>
+                <img src="{% static 'game/images/cs-icon.png' %}" alt="Computer Science Mode Icon" class="rules-icon"/>
+            </div>
+            <p class="rules-text">
+                Dobit ćeš pitanje i nasumičan broj kao početni prijedlog. 
+                Tvoj cilj je procijeniti je li točan odgovor veći ili manji od tog broja. 
+                Pitanja su vezana uz informatiku, računarstvo, komunikacije, arhitekturu, mreže, a možeš birati težinu (easy, medium, hard).
+            </p>
+        </div>
+        </section>
+    </div>
+    <footer class="site-footer">
+        &copy; 2025 The Higher-Lower Game. &nbsp;All rights reserved.
+    </footer>
 </body>
 </html>

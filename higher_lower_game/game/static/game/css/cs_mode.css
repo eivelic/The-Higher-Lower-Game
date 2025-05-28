@@ -100,6 +100,7 @@ html, body {
 
 .cs-link:hover {
   color: #c5c9de;
+  text-decoration: underline;
 }
 
 /* Responsive za manje ekrane */
