@@ -1,9 +1,28 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
-<head><meta charset="UTF-8"><title>Classic Mode</title></head>
+<head>
+    <meta charset="UTF-8" />
+    <title>Classic Mode</title>
+    <link rel="stylesheet" href="{% static 'game/css/classic_mode.css' %}">
+</head>
 <body>
-    <h1>Classic Mode</h1>
-    <p>Ovdje će ići igra s pojmovima i njihovom popularnošću...</p>
-    <p><a href="{% url 'homepage' %}">Nazad na početak</a></p>
+    <div class="score">Score: {{ score }}</div>
+
+    <div class="item-card" style="background-image: url('{{ left_item.image.url }}')">
+        <h2>{{ left_item.name }}</h2>
+        <p>{{ left_item.monthly_searches }} pretraga</p>
+    </div>
+
+    <div class="item-card" style="background-image: url('{{ right_item.image.url }}')">
+        <h2>{{ right_item.name }}</h2>
+        <p>Više ili manje od {{ left_item.name }}?</p>
+
+        <form method="post" action="{% url 'classic_mode' %}">
+            {% csrf_token %}
+            <button type="submit" name="guess" value="higher">Više</button>
+            <button type="submit" name="guess" value="lower">Manje</button>
+        </form>
+    </div>
 </body>
 </html>

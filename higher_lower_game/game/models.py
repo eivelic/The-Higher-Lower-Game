@@ -5,6 +5,7 @@ from django.db import models
 class ClassicItem(models.Model):
     name = models.CharField(max_length=100)
     monthly_searches = models.IntegerField()
+    image = models.ImageField(upload_to='classic_images/', blank=True, null=True)
 
     def __str__(self):
         return self.name

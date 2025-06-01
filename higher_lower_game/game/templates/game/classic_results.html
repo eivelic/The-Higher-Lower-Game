@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kraj igre - Rezultat</title>
+</head>
+<body>
+    <h1>Kraj igre!</h1>
+    <p>Tvoj konačni rezultat: {{ score }}</p>
+    <p><a href="{% url 'classic_mode' %}">Igraj ponovno</a></p>
+    <p><a href="{% url 'homepage' %}">Nazad na početak</a></p>
+</body>
+</html>

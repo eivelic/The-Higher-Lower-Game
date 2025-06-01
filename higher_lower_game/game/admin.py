@@ -9,5 +9,5 @@ class CSQuestionAdmin(ImportExportModelAdmin):
     list_display = ('question_text', 'correct_answer', 'difficulty')
 
 @admin.register(ClassicItem)
-class ClassicItemAdmin(admin.ModelAdmin):
+class ClassicItemAdmin(ImportExportModelAdmin):
     list_display = ('name', 'monthly_searches')
