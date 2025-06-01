@@ -1,29 +1,63 @@
 body {
-    font-family: Arial, sans-serif;
-    background: #222;
-    color: white;
+    margin: 0;
+    padding: 0;
+    background-color: #222;
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    display: block; /* <- VRATI NA BLOCK! */
+    background-image: url('../images/background-screen-image.jpg'); /* zamijeni s tvojom */
+    background-size: cover; /* preporučujem da dodaš */
+    background-position: center; /* i ovo */
+    background-repeat: no-repeat;
+}
+
+.card-container {
     display: flex;
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
     gap: 40px;
-    padding: 40px;
+    width: 100%;
+    padding: 100px 20px 20px;
+    box-sizing: border-box;
 }
 
 .item-card {
-    width: 300px;
-    height: 200px;
-    border-radius: 15px;
+    width: 700px;
+    height: 500px;
     background-size: cover;
     background-position: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     position: relative;
-    box-shadow: 0 0 15px rgba(0,0,0,0.7);
-    cursor: pointer;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
+    color: white;
     padding: 20px;
-    user-select: none;
 }
 
+.item-card h2 {
+    margin-bottom: 10px;
+}
+
+/* Score u gornji lijevi kut */
+.score {
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    background: #444;
+    padding: 10px 15px;
+    border-radius: 8px;
+    z-index: 100;
+}
+
+/* Tamni overlay */
 .item-card::before {
     content: "";
     position: absolute;
@@ -31,21 +65,84 @@ body {
     background: rgba(0,0,0,0.4);
     border-radius: 15px;
     z-index: 0;
-    pointer-events: none; 
+    pointer-events: none;
 }
 
-.item-card h2, .item-card p {
+.item-card h2,
+.item-card p,
+.item-card form {
     position: relative;
     z-index: 1;
     margin: 0;
 }
 
-.score {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    font-size: 20px;
-    background: #444;
-    padding: 10px 15px;
+.item-card form {
+    margin-top: 10px;
+}
+
+.item-card button {
+    margin-right: 10px;
+    padding: 8px 12px;
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.item-card button:hover {
+    background-color: #777;
+}
+
+.item-card button {
+    margin: 10px 5px 0;
+    padding: 10px 18px;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    border: none;
     border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.item-card button:hover {
+    background: linear-gradient(135deg, #a777e3, #6e8efb);
+    transform: scale(1.05);
+}
+
+.fade-out {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.item-card {
+    opacity: 0;
+    transition: opacity 2s ease;
+}
+
+body.loaded .item-card {
+    opacity: 1;
 }

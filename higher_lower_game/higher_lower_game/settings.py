@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'game',
     'import_export',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [

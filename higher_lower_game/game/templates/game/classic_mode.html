@@ -1,28 +1,85 @@
 <!DOCTYPE html>
 {% load static %}
+{% load humanize %}
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <title>Classic Mode</title>
-    <link rel="stylesheet" href="{% static 'game/css/classic_mode.css' %}">
+    <link rel="stylesheet" href="{% static 'game/css/classic_mode.css' %}?v=26">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="score">Score: {{ score }}</div>
 
-    <div class="item-card" style="background-image: url('{{ left_item.image.url }}')">
-        <h2>{{ left_item.name }}</h2>
-        <p>{{ left_item.monthly_searches }} pretraga</p>
-    </div>
+    <!-- WRAP both cards inside card-container -->
+    <div class="card-container">
+        <div class="item-card" id="left-card" style="background-image: url('{{ left_item.image.url }}')">
+            <h2>{{ left_item.name }}</h2>
+            <p>{{ left_item.monthly_searches|intcomma }} pretraga</p>
+        </div>
 
-    <div class="item-card" style="background-image: url('{{ right_item.image.url }}')">
-        <h2>{{ right_item.name }}</h2>
-        <p>Više ili manje od {{ left_item.name }}?</p>
+        <div class="item-card" id="right-card" style="background-image: url('{{ right_item.image.url }}')">
+            <h2>{{ right_item.name }}</h2>
+            <p>Više ili manje od {{ left_item.name }}?</p>
 
-        <form method="post" action="{% url 'classic_mode' %}">
-            {% csrf_token %}
-            <button type="submit" name="guess" value="higher">Više</button>
-            <button type="submit" name="guess" value="lower">Manje</button>
-        </form>
+            <form method="post" action="{% url 'classic_mode' %}">
+                {% csrf_token %}
+                <button type="submit" name="guess" value="higher">Više</button>
+                <button type="submit" name="guess" value="lower">Manje</button>
+            </form>
+        </div>
     </div>
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const cards = document.querySelectorAll('.item-card');
+
+    // FADE IN
+    // Malo čekamo da browser registrira opacity=0 i transition prije nego ga stavimo na 1
+    setTimeout(() => {
+        cards.forEach(card => {
+            card.style.opacity = '1';
+        });
+    }, 50);  // 50ms delay za siguran start fade-in
+
+    // Dodaj event listener za button-e (ako treba fade-out pre submit)
+    const buttons = document.querySelectorAll('.item-card button');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const guess = this.value;
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            // Fade out kartica
+            cards.forEach(card => {
+                card.style.opacity = '0';
+            });
+
+            // Nakon 2s submit forme
+            setTimeout(() => {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = "{% url 'classic_mode' %}";
+
+                const csrfInput = document.createElement('input');
+                csrfInput.type = 'hidden';
+                csrfInput.name = 'csrfmiddlewaretoken';
+                csrfInput.value = csrfToken;
+
+                const guessInput = document.createElement('input');
+                guessInput.type = 'hidden';
+                guessInput.name = 'guess';
+                guessInput.value = guess;
+
+                form.appendChild(csrfInput);
+                form.appendChild(guessInput);
+                document.body.appendChild(form);
+                form.submit();
+            }, 2000);
+        });
+    });
+});
+</script>
 </body>
 </html>

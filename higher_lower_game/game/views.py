@@ -106,8 +106,19 @@ def classic_mode(request):
             # Pomakni se na iduću rundu:
             request.session['item1_id'] = item2.id
             available_ids = list(ClassicItem.objects.exclude(id=item2.id).values_list('id', flat=True))
-            request.session['item2_id'] = random.choice(available_ids)
-            return redirect('classic_mode')
+            new_item2_id = random.choice(available_ids)
+            request.session['item2_id'] = new_item2_id
+
+            item1 = item2
+            item2 = ClassicItem.objects.get(id=new_item2_id)
+
+            return render(request, 'game/classic_mode.html', {
+            'left_item': item1,
+            'right_item': item2,
+            'score': request.session.get('score', 0),
+            'correct': True  # → Pošalji flag za JS animaciju
+        })
+
         else:
             final_score = request.session['score']
             request.session['score'] = 0
