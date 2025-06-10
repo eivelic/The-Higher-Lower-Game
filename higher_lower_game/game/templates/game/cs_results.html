@@ -3,16 +3,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'game/css/cs_mode.css' %}">
+    <link rel="stylesheet" href="{% static 'game/css/cs_results.css' %}">
     <title>CS Mode - Rezultat</title>
 </head>
 <body>
-    <div class="cs-results-container">
+    <div class="cs-container">
         <h1 class="cs-title">Rezultat igre</h1>
         <p class="cs-score">Vaš rezultat: {{ score }}</p>
         <p class="cs-score">Najbolji rezultat: {{ best_score }}</p>
-        <p><a href="{% url 'cs_mode' %}" class="cs-link">Igraj ponovno</a></p>
-        <p><a href="{% url 'homepage' %}" class="cs-link">Nazad na početak</a></p>
+        <div class="cs-links-container">
+            <a href="{% url 'cs_mode' %}" class="cs-link">Igraj ponovno</a>
+            <a href="{% url 'homepage' %}" class="cs-link">Nazad na početak</a>
+        </div>
     </div>
 </body>
 </html>
