@@ -4,10 +4,10 @@ body {
     background-color: #222;
     font-family: 'Poppins', sans-serif;
     font-size: 28px;
-    display: block; /* <- VRATI NA BLOCK! */
+    display: block;
     background-image: url('../images/background-screen-image.jpg'); /* zamijeni s tvojom */
-    background-size: cover; /* preporučujem da dodaš */
-    background-position: center; /* i ovo */
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
 }
 
@@ -36,28 +36,40 @@ body {
     align-items: center;
     color: white;
     padding: 20px;
+    opacity: 0;
+    transition: opacity 2s ease;
+}
+
+body.loaded .item-card {
+    opacity: 1;
 }
 
 .item-card h2 {
     margin-bottom: 10px;
 }
 
-/* Score u gornji lijevi kut */
-.score {
+.score-container {
     position: fixed;
-    justify-content: center;
-    align-items: center;
-    top: 15%;
+    top: 5%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 100;
+    align-items: center;
+}
+
+.score,
+.high-score {
     font-size: 20px;
     background: #444;
     padding: 10px 15px;
     border-radius: 8px;
-    z-index: 100;
+    color: white;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Tamni overlay */
 .item-card::before {
     content: "";
     position: absolute;
@@ -78,20 +90,6 @@ body {
 
 .item-card form {
     margin-top: 10px;
-}
-
-.item-card button {
-    margin-right: 10px;
-    padding: 8px 12px;
-    background-color: #555;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.item-card button:hover {
-    background-color: #777;
 }
 
 .item-card button {
@@ -136,13 +134,4 @@ body {
         opacity: 1;
         transform: scale(1);
     }
-}
-
-.item-card {
-    opacity: 0;
-    transition: opacity 2s ease;
-}
-
-body.loaded .item-card {
-    opacity: 1;
 }

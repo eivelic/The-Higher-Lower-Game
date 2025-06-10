@@ -5,11 +5,14 @@
 <head>
     <meta charset="UTF-8" />
     <title>Classic Mode</title>
-    <link rel="stylesheet" href="{% static 'game/css/classic_mode.css' %}?v=26">
+    <link rel="stylesheet" href="{% static 'game/css/classic_mode.css' %}?v=28">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="score">Score: {{ score }}</div>
+    <div class="score-container">
+        <div class="high-score">High Score: {{ high_score }}</div>
+        <div class="score">Score: {{ score }}</div>
+    </div>
 
     <!-- WRAP both cards inside card-container -->
     <div class="card-container">
@@ -34,14 +37,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const cards = document.querySelectorAll('.item-card');
 
     // FADE IN
-    // Malo čekamo da browser registrira opacity=0 i transition prije nego ga stavimo na 1
     setTimeout(() => {
         cards.forEach(card => {
             card.style.opacity = '1';
         });
-    }, 50);  // 50ms delay za siguran start fade-in
+    }, 50);
 
-    // Dodaj event listener za button-e (ako treba fade-out pre submit)
+    // Dodaj event listener za button-e
     const buttons = document.querySelectorAll('.item-card button');
 
     buttons.forEach(button => {

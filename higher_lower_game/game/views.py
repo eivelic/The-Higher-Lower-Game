@@ -80,9 +80,11 @@ def classic_mode(request):
     if len(items) < 2:
         return render(request, 'game/not_enough_items.html')
 
-    # Inicijaliziraj score u session
+    # Inicijaliziraj score i high_score u session
     if 'score' not in request.session:
         request.session['score'] = 0
+    if 'high_score' not in request.session:
+        request.session['high_score'] = 0
 
     if request.method == 'POST':
         guess = request.POST.get('guess')
@@ -103,7 +105,10 @@ def classic_mode(request):
 
         if correct:
             request.session['score'] += 1
-            # Pomakni se na iduću rundu:
+            # Ažuriraj high_score ako je trenutni score veći
+            if request.session['score'] > request.session['high_score']:
+                request.session['high_score'] = request.session['score']
+            # Pomakni se na iduću rundu
             request.session['item1_id'] = item2.id
             available_ids = list(ClassicItem.objects.exclude(id=item2.id).values_list('id', flat=True))
             new_item2_id = random.choice(available_ids)
@@ -113,18 +118,26 @@ def classic_mode(request):
             item2 = ClassicItem.objects.get(id=new_item2_id)
 
             return render(request, 'game/classic_mode.html', {
-            'left_item': item1,
-            'right_item': item2,
-            'score': request.session.get('score', 0),
-            'correct': True  # → Pošalji flag za JS animaciju
-        })
+                'left_item': item1,
+                'right_item': item2,
+                'score': request.session.get('score', 0),
+                'high_score': request.session.get('high_score', 0),
+                'correct': True  # → Pošalji flag za JS animaciju
+            })
 
         else:
             final_score = request.session['score']
+            # Ažuriraj high_score ako je trenutni score veći
+            if final_score > request.session['high_score']:
+                request.session['high_score'] = final_score
             request.session['score'] = 0
             request.session['item1_id'] = None
             request.session['item2_id'] = None
-            return render(request, 'game/classic_results.html', {'score': final_score})
+            request.session.modified = True
+            return render(request, 'game/classic_results.html', {
+                'score': final_score,
+                'high_score': request.session.get('high_score', 0)
+            })
 
     # GET zahtjev
     if not request.session.get('item1_id') or not request.session.get('item2_id'):
@@ -142,6 +155,6 @@ def classic_mode(request):
     return render(request, 'game/classic_mode.html', {
         'left_item': item1,
         'right_item': item2,
-        'score': request.session.get('score', 0)
+        'score': request.session.get('score', 0),
+        'high_score': request.session.get('high_score', 0)
     })
-
