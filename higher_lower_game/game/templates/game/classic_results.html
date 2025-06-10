@@ -3,12 +3,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Kraj igre - Rezultat</title>
+    <title>Kraj igre</title>
+    <link rel="stylesheet" href="{% static 'game/css/classic_results.css' %}">
 </head>
-<body>
-    <h1>Kraj igre!</h1>
-    <p>Tvoj konačni rezultat: {{ score }}</p>
-    <p><a href="{% url 'classic_mode' %}">Igraj ponovno</a></p>
-    <p><a href="{% url 'homepage' %}">Nazad na početak</a></p>
+<body class="classic-end-game-container
+    {% if score <= 2 %}
+        bg-gif-1
+    {% elif score <= 5 %}
+        bg-gif-2
+    {% elif score <= 9 %}
+        bg-gif-3
+    {% else %}
+        bg-gif-4
+    {% endif %}
+">
+    <h1 class="classic-end-game">Kraj igre!</h1>
+    <p class="classic-end-result">Tvoj konačni rezultat: {{ score }}</p>
+    <p class="classic-end-message">
+        {% if score <= 2 %}
+            That's so baaaaaad!
+            Do you live under a rock??
+        {% elif score <= 5 %}
+            Meeeeh... That's average.
+        {% elif score <= 9 %}
+            Damn, that's good!
+        {% else %}
+            You're in our top 4.2%!
+            You rooooooooockk!!
+        {% endif %}
+    </p>
+    <div class="buttons-container">
+        <a href="{% url 'classic_mode' %}">Igraj ponovno</a>
+        <a href="{% url 'homepage' %}">Nazad na početak</a>
+    </div>
 </body>
 </html>

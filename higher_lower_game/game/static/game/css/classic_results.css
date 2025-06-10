@@ -1,0 +1,82 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden; /* sprječava horizontalni scroll ako postoji */
+}
+
+.classic-end-game-container {
+    box-sizing: border-box;
+    height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+/* Pozadine za svaki raspon rezultata */
+.bg-gif-1 {
+    background-image: url('/static/game/images/0-2.gif');
+}
+
+.bg-gif-2 {
+    background-image: url('/static/game/images/3-5.gif');
+}
+
+.bg-gif-3 {
+    background-image: url('/static/game/images/6-9.gif');
+}
+
+.bg-gif-4 {
+    background-image: url('/static/game/images/10-.gif');
+}
+
+.classic-end-game {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin-top: -100px;
+}
+
+.classic-end-result {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.classic-end-message {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+/* Dodajemo kontejner za gumbe */
+.buttons-container {
+    display: flex;
+    gap: 20px; /* razmak između gumba */
+}
+
+.classic-end-game-container a {
+    display: inline-block;
+    background-color: #ffffff88;
+    color: #333;
+    padding: 10px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.classic-end-game-container a:hover {
+    background-color: #fff;
+    color: #2575fc;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
