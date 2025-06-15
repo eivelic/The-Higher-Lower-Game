@@ -57,10 +57,9 @@ html, body {
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
 
-/* Dodajemo kontejner za gumbe */
 .buttons-container {
     display: flex;
-    gap: 20px; /* razmak između gumba */
+    gap: 20px; 
 }
 
 .classic-end-game-container a {

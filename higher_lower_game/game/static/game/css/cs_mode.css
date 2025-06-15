@@ -1,7 +1,7 @@
 html, body {
   height: 100%;
   margin: 0;
-  background-image: url('/static/game/images/cs_default.jpg'); /* zamijeni s tvojom */
+  background-image: url('/static/game/images/cs_default.jpg'); 
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -24,11 +24,10 @@ html, body {
   text-align: center;
   color: #f0f0f5;
   border: 2px solid #3949ab;
-  backdrop-filter: blur(5px);  /* POJAČANI BLUR */
+  backdrop-filter: blur(5px);  
   -webkit-backdrop-filter: blur(15px); /* za Safari */
 }
 
-/* Naslov */
 .cs-title {
   font-weight: 800;
   font-size: 2.75rem;
@@ -37,7 +36,6 @@ html, body {
   text-shadow: 0 0 8px rgba(227, 230, 243, 0.7);
 }
 
-/* Form elementi */
 .cs-form {
   display: flex;
   flex-direction: column;

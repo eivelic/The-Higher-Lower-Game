@@ -1,7 +1,7 @@
 html, body {
     height: 100%;
     margin: 0;
-    background-image: url('/static/game/images/cs_default.jpg'); /* Ista pozadina kao u cs_mode */
+    background-image: url('/static/game/images/cs_default.jpg'); 
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;

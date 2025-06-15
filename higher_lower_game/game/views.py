@@ -53,7 +53,7 @@ def cs_play(request):
     question = random.choice(questions)
     request.session['cs_question_id'] = question.id
 
-    correct = int(question.correct_answer)  # <-- OBAVEZNO pretvori u int OVDJE
+    correct = int(question.correct_answer)  # <-- moras pretvorit u int ovdje
     offset = random.randint(1, max(1, int(abs(correct * 0.5))))
     if random.choice([True, False]):
         given_number = correct + offset
@@ -92,7 +92,7 @@ def classic_mode(request):
         item2_id = request.session.get('item2_id')
 
         if not item1_id or not item2_id:
-            return redirect('classic_mode')  # Ponovno učitavanje ako nema itema
+            return redirect('classic_mode')  # ponovno ucitavanje ako nema itema
 
         item1 = ClassicItem.objects.get(id=item1_id)
         item2 = ClassicItem.objects.get(id=item2_id)
@@ -105,10 +105,10 @@ def classic_mode(request):
 
         if correct:
             request.session['score'] += 1
-            # Ažuriraj high_score ako je trenutni score veći
+            # azuriraj high_score ako je trenutni score veći
             if request.session['score'] > request.session['high_score']:
                 request.session['high_score'] = request.session['score']
-            # Pomakni se na iduću rundu
+            # pomakni se na iduću rundu
             request.session['item1_id'] = item2.id
             available_ids = list(ClassicItem.objects.exclude(id=item2.id).values_list('id', flat=True))
             new_item2_id = random.choice(available_ids)
@@ -122,12 +122,12 @@ def classic_mode(request):
                 'right_item': item2,
                 'score': request.session.get('score', 0),
                 'high_score': request.session.get('high_score', 0),
-                'correct': True  # → Pošalji flag za JS animaciju
+                'correct': True  # pošalji flag za js animaciju
             })
 
         else:
             final_score = request.session['score']
-            # Ažuriraj high_score ako je trenutni score veći
+            # azuriraj high_score ako je trenutni score veći
             if final_score > request.session['high_score']:
                 request.session['high_score'] = final_score
             request.session['score'] = 0
