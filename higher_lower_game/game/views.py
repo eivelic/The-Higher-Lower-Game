@@ -5,7 +5,7 @@ import random
 # Create your views here.
 
 def homepage(request):
-    return render(request, 'game/homepage.html')
+    return render(request, 'game/index.html')
 
 def cs_mode(request):
     # Prikaz izbora težine
