@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Classic Leaderboard</title>
+    <link rel="stylesheet" href="{% static 'game/css/leaderboard.css' %}">
+</head>
+<body>
+    <div class="leaderboard-container">
+        <h1>Top 5 – Classic Mode</h1>
+        <ol>
+            {% for score in scores %}
+                <li>{{ score.nickname }} – {{ score.score }}</li>
+            {% endfor %}
+        </ol>
+        <a href="{% url 'homepage' %}">Nazad</a>
+    </div>
+</body>
+</html>

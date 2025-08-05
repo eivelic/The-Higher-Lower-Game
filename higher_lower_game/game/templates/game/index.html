@@ -18,11 +18,19 @@
     <!-- Glavni container s poluprozirnom pozadinom -->
     <div class="homepage-container">
         <img src="{% static 'game/images/higher_lower.jpg' %}" alt="Higher-Lower Banner" class="homepage-image"/>
-        <ul class="mode-list">
-            <li><a href="{% url 'classic_mode' %}" class="mode-link-2">Classic</a></li>
-            <li><a href="{% url 'cs_mode' %}" class="mode-link">Computer Science</a></li>
-        </ul>
+        
+        <div class="mode-leaderboard-wrapper">
+            <div class="mode-block">
+                <a href="{% url 'classic_mode' %}" class="mode-link-2">Classic</a>
+                <a href="{% url 'classic_leaderboard' %}" class="mode-link-2 leaderboard-link">Classic ljestvica</a>
+            </div>
+            <div class="mode-block">
+                <a href="{% url 'cs_mode' %}" class="mode-link">Computer Science</a>
+                <a href="{% url 'cs_leaderboard' %}" class="mode-link leaderboard-link">CS ljestvica</a>
+            </div>
+        </div>
 
+        <!-- Pravila -->
         <section class="rules-box">
             <h3 class="rules-title">Pravila igre</h3>
             <div class="rules-section">
@@ -36,19 +44,34 @@
                 </p>
             </div>
 
-        <div class="rules-section">
-            <div class="rules-header">
-                <h4 class="rules-subtitle">Computer Science</h4>
-                <img src="{% static 'game/images/cs-icon.png' %}" alt="Computer Science Mode Icon" class="rules-icon"/>
+            <div class="rules-section">
+                <div class="rules-header">
+                    <h4 class="rules-subtitle">Computer Science</h4>
+                    <img src="{% static 'game/images/cs-icon.png' %}" alt="Computer Science Mode Icon" class="rules-icon"/>
+                </div>
+                <p class="rules-text">
+                    Dobit ćeš pitanje i nasumičan broj kao početni prijedlog. 
+                    Tvoj cilj je procijeniti je li točan odgovor veći ili manji od tog broja. 
+                    Pitanja su vezana uz informatiku, računarstvo, komunikacije, arhitekturu, mreže, a možeš birati težinu (easy, medium, hard).
+                </p>
             </div>
-            <p class="rules-text">
-                Dobit ćeš pitanje i nasumičan broj kao početni prijedlog. 
-                Tvoj cilj je procijeniti je li točan odgovor veći ili manji od tog broja. 
-                Pitanja su vezana uz informatiku, računarstvo, komunikacije, arhitekturu, mreže, a možeš birati težinu (easy, medium, hard).
-            </p>
-        </div>
         </section>
+
+        <!-- Prikaz nadimka -->
+        {% if nickname %}
+            <div class="nickname-section">
+                <p class="greeting">Dobrodošao, {{ nickname }}!</p>
+                <form method="post" action="{% url 'reset_nickname' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-reset-nickname">Promijeni nadimak</button>
+                </form>
+            </div>
+        {% else %}
+            <script>window.location.href = "{% url 'nickname_input' %}";</script>
+        {% endif %}
+
     </div>
+
     <footer class="site-footer">
         &copy; 2025 The Higher-Lower Game. &nbsp;All rights reserved.
     </footer>

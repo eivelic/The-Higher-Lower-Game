@@ -24,3 +24,17 @@ class CSQuestion(models.Model):
     def __str__(self):
         return self.question_text
 
+class ClassicLeaderboard(models.Model):
+    nickname = models.CharField(max_length=50)
+    score = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.nickname}: {self.score}"
+
+class CSLeaderboard(models.Model):
+    nickname = models.CharField(max_length=50)
+    score = models.IntegerField()
+    difficulty = models.CharField(max_length=10, default='easy')  # 'easy', 'medium', 'hard'
+
+    def __str__(self):
+        return f"{self.nickname}: {self.score}"

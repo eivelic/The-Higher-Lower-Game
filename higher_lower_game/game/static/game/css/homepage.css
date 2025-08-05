@@ -173,3 +173,57 @@
     background-color: rgba(0, 0, 0, 0.7);
     text-shadow: 0 0 4px #ffffff55;
 }
+
+.mode-leaderboard-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 40px; /* razmak između stupaca */
+    margin-bottom: 40px;
+}
+
+.mode-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* razmak između gumba i ljestvice */
+}
+
+/* Ako želiš padding za ljestvicu da odgovara gumbu */
+.leaderboard-link.mode-link-2 {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.nickname-section {
+    margin-top: 40px;
+    text-align: center;
+    color: #edf0f1;
+    text-shadow: 0 0 6px #ffffffaa;
+}
+
+.greeting {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* Stil za gumb "Promijeni nadimak" */
+.btn-reset-nickname {
+    background-color: #00ffffcc;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: #000000;
+    cursor: pointer;
+    box-shadow: 0 0 15px #00ffffaa;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-reset-nickname:hover {
+    background-color: #00ffff;
+    box-shadow: 0 0 25px #00ffffee;
+}

@@ -1,14 +1,52 @@
 from django.shortcuts import render, redirect
-from .models import ClassicItem, CSQuestion
+from .models import ClassicItem, CSQuestion, ClassicLeaderboard, CSLeaderboard
+from .forms import NicknameForm
 import random
 
-# Create your views here.
+# ---------------------- NOVO: unos nadimka ----------------------
+def nickname_input(request):
+    if request.method == 'POST':
+        form = NicknameForm(request.POST)
+        if form.is_valid():
+            request.session['nickname'] = form.cleaned_data['nickname']
+            return redirect('homepage')
+    else:
+        form = NicknameForm()
+    return render(request, 'game/nickname.html', {'form': form})
 
+# ---------------------- NOVO: izmjena nadimka ----------------------   
+def reset_nickname(request):
+    if request.method == 'POST':
+        request.session.pop('nickname', None)
+        return redirect('nickname_input')
+    return redirect('homepage')
+
+# ---------------------- IZMJENA: homepage ----------------------
 def homepage(request):
-    return render(request, 'game/index.html')
+    nickname = request.session.get('nickname')
+    return render(request, 'game/index.html', {
+        'nickname': nickname,
+    })
 
+# ---------------------- NOVO: leaderboard prikaz ----------------------
+def classic_leaderboard(request):
+    scores = ClassicLeaderboard.objects.order_by('-score')[:5]
+    return render(request, 'game/classic_leaderboard.html', {'scores': scores})
+
+def cs_leaderboard(request):
+    # Dohvatimo top 5 za svaku težinu posebno
+    easy_scores = CSLeaderboard.objects.filter(difficulty='easy').order_by('-score')[:5]
+    medium_scores = CSLeaderboard.objects.filter(difficulty='medium').order_by('-score')[:5]
+    hard_scores = CSLeaderboard.objects.filter(difficulty='hard').order_by('-score')[:5]
+
+    return render(request, 'game/cs_leaderboard.html', {
+        'easy_scores': easy_scores,
+        'medium_scores': medium_scores,
+        'hard_scores': hard_scores,
+    })
+
+# ---------------------- POSTOJEĆI: cs_mode ----------------------
 def cs_mode(request):
-    # Prikaz izbora težine
     if request.method == 'POST':
         difficulty = request.POST.get('difficulty')
         if difficulty in ['easy', 'medium', 'hard']:
@@ -17,6 +55,7 @@ def cs_mode(request):
             return redirect('cs_play')
     return render(request, 'game/cs_mode.html')
 
+# ---------------------- POSTOJEĆI: cs_play uz dodatak leaderboarda ----------------------
 def cs_play(request):
     difficulty = request.session.get('cs_difficulty', None)
     if difficulty is None:
@@ -30,9 +69,7 @@ def cs_play(request):
 
     if request.method == 'POST':
         player_choice = request.POST.get('choice')
-        question_id = request.session.get('cs_question_id')
         question = CSQuestion.objects.get(id=question_id)
-
         given_number = request.session.get('cs_given_number')
         correct_answer = int(question.correct_answer)
 
@@ -42,18 +79,24 @@ def cs_play(request):
             message = 'Točno!'
         else:
             message = 'Netočno!'
-            best_score = request.session.get('cs_best_score', 0)
-            if request.session['cs_score'] > best_score:
-                request.session['cs_best_score'] = request.session['cs_score']
+            nickname = request.session.get('nickname', 'Anonimac')
+            CSLeaderboard.objects.create(nickname=nickname, score=request.session['cs_score'], difficulty=difficulty)
+
+            # Čuvamo samo top 5 po težini
+            top_scores = CSLeaderboard.objects.filter(difficulty=difficulty).order_by('-score')
+            if top_scores.count() > 5:
+                for s in top_scores[5:]:
+                    s.delete()
+
             return render(request, 'game/cs_results.html', {
                 'score': request.session['cs_score'],
-                'best_score': request.session.get('cs_best_score', 0)
+                'best_score': top_scores.first().score if top_scores else 0
             })
 
     question = random.choice(questions)
     request.session['cs_question_id'] = question.id
 
-    correct = int(question.correct_answer)  # <-- moras pretvorit u int ovdje
+    correct = int(question.correct_answer)
     offset = random.randint(1, max(1, int(abs(correct * 0.5))))
     if random.choice([True, False]):
         given_number = correct + offset
@@ -71,20 +114,14 @@ def cs_play(request):
         'score': request.session.get('cs_score', 0),
     })
 
-from django.shortcuts import render, redirect
-from .models import ClassicItem
-import random
-
+# ---------------------- POSTOJEĆI: classic_mode uz dodatak leaderboarda ----------------------
 def classic_mode(request):
     items = list(ClassicItem.objects.all())
     if len(items) < 2:
         return render(request, 'game/not_enough_items.html')
 
-    # Inicijaliziraj score i high_score u session
     if 'score' not in request.session:
         request.session['score'] = 0
-    if 'high_score' not in request.session:
-        request.session['high_score'] = 0
 
     if request.method == 'POST':
         guess = request.POST.get('guess')
@@ -92,7 +129,7 @@ def classic_mode(request):
         item2_id = request.session.get('item2_id')
 
         if not item1_id or not item2_id:
-            return redirect('classic_mode')  # ponovno ucitavanje ako nema itema
+            return redirect('classic_mode')
 
         item1 = ClassicItem.objects.get(id=item1_id)
         item2 = ClassicItem.objects.get(id=item2_id)
@@ -105,10 +142,6 @@ def classic_mode(request):
 
         if correct:
             request.session['score'] += 1
-            # azuriraj high_score ako je trenutni score veći
-            if request.session['score'] > request.session['high_score']:
-                request.session['high_score'] = request.session['score']
-            # pomakni se na iduću rundu
             request.session['item1_id'] = item2.id
             available_ids = list(ClassicItem.objects.exclude(id=item2.id).values_list('id', flat=True))
             new_item2_id = random.choice(available_ids)
@@ -121,25 +154,29 @@ def classic_mode(request):
                 'left_item': item1,
                 'right_item': item2,
                 'score': request.session.get('score', 0),
-                'high_score': request.session.get('high_score', 0),
-                'correct': True  # pošalji flag za js animaciju
+                'correct': True
             })
 
         else:
             final_score = request.session['score']
-            # azuriraj high_score ako je trenutni score veći
-            if final_score > request.session['high_score']:
-                request.session['high_score'] = final_score
+            nickname = request.session.get('nickname', 'Anonimac')
+            ClassicLeaderboard.objects.create(nickname=nickname, score=final_score)
+
+            # Zadrži samo top 5
+            top_scores = ClassicLeaderboard.objects.order_by('-score')
+            if top_scores.count() > 5:
+                for s in top_scores[5:]:
+                    s.delete()
+
             request.session['score'] = 0
             request.session['item1_id'] = None
             request.session['item2_id'] = None
             request.session.modified = True
+
             return render(request, 'game/classic_results.html', {
-                'score': final_score,
-                'high_score': request.session.get('high_score', 0)
+                'score': final_score
             })
 
-    # GET zahtjev
     if not request.session.get('item1_id') or not request.session.get('item2_id'):
         item1, item2 = random.sample(items, 2)
         request.session['item1_id'] = item1.id
@@ -155,6 +192,5 @@ def classic_mode(request):
     return render(request, 'game/classic_mode.html', {
         'left_item': item1,
         'right_item': item2,
-        'score': request.session.get('score', 0),
-        'high_score': request.session.get('high_score', 0)
+        'score': request.session.get('score', 0)
     })

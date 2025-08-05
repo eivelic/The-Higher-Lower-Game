@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CS Leaderboard</title>
+    <link rel="stylesheet" href="{% static 'game/css/leaderboard.css' %}">
+</head>
+<body>
+    <div class="leaderboard-container">
+        <h1>Top 5 – Computer Science Mode</h1>
+
+        <h2>Easy</h2>
+        <ol>
+            {% for score in easy_scores %}
+                <li>{{ score.nickname }} – {{ score.score }}</li>
+            {% empty %}
+                <li>Nema rezultata za easy težinu.</li>
+            {% endfor %}
+        </ol>
+
+        <h2>Medium</h2>
+        <ol>
+            {% for score in medium_scores %}
+                <li>{{ score.nickname }} – {{ score.score }}</li>
+            {% empty %}
+                <li>Nema rezultata za medium težinu.</li>
+            {% endfor %}
+        </ol>
+
+        <h2>Hard</h2>
+        <ol>
+            {% for score in hard_scores %}
+                <li>{{ score.nickname }} – {{ score.score }}</li>
+            {% empty %}
+                <li>Nema rezultata za hard težinu.</li>
+            {% endfor %}
+        </ol>
+
+        <a href="{% url 'homepage' %}">Nazad</a>
+    </div>
+</body>
+</html>

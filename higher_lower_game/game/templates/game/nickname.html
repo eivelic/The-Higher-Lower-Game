@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Unesi nadimak</title>
+    <link rel="stylesheet" href="{% static 'game/css/nickname.css' %}">
+</head>
+<body>
+    <div class="nickname-container">
+        <h1>Dobrodošao!</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Nastavi</button>
+        </form>
+    </div>
+</body>
+</html>
