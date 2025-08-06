@@ -1,0 +1,108 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* Container */
+.nickname-container {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+    backdrop-filter: blur(6px);
+}
+
+/* Heading */
+.nickname-container h1 {
+    font-size: 32px;
+    margin-bottom: 26px; /* razmak između naslova i forme */
+    text-shadow: 0 0 6px #ffffffaa;
+}
+
+/* Form */
+.nickname-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Input fields */
+.nickname-container input[type="text"],
+.nickname-container input[type="password"],
+.nickname-container input[type="email"],
+.nickname-container select,
+.nickname-container textarea {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+/* Labels */
+.nickname-container label {
+    text-align: left;
+    font-weight: 500;
+}
+
+/* Button */
+.nickname-container button {
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background-color: #00ffffcc;
+    color: #000;
+    cursor: pointer;
+    box-shadow: 0 0 15px #00ffff88;
+    transition: all 0.3s ease;
+}
+
+.nickname-container button:hover {
+    background-color: #00ffff;
+    box-shadow: 0 0 25px #00ffffdd;
+}
+
+.nickname-container form p {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* razmak između labela i input polja */
+}
+
+.nickname-container form label {
+    text-align: center;
+}
+
+/* Background video */
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    object-fit: cover;
+    opacity: 0.7;
+}

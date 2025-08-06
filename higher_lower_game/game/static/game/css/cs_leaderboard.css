@@ -1,0 +1,124 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-image: url('../images/homepage_bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    color: #edf0f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* Container */
+.leaderboard-container {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 16px;
+    padding: 40px 50px;
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+/* Title */
+.leaderboard-container h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 30px;
+    text-shadow: 0 0 6px #ffffffaa;
+}
+
+/* Difficulty sections */
+.difficulty-sections {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.difficulty {
+    flex: 1 1 300px;
+    min-width: 280px;
+    background-color: rgba(18, 18, 18, 0.6);
+    border-radius: 12px;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+    text-align: left;
+}
+
+/* Individual difficulty shadows */
+.difficulty.easy {
+    box-shadow: 0 0 15px #00ff99;
+}
+.difficulty.medium {
+    box-shadow: 0 0 15px #ffaa00;
+}
+.difficulty.hard {
+    box-shadow: 0 0 15px #ff4444;
+}
+
+.difficulty h2 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    text-shadow: 0 0 5px #ffffffaa;
+    border-bottom: 1px solid #ffffff22;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.difficulty ol {
+    list-style: decimal inside;
+    font-size: 18px;
+    font-weight: 500;
+    color: #ffffff;
+    text-shadow: 0 0 4px #ffffff99;
+    padding-left: 0;
+}
+
+.difficulty li {
+    margin-bottom: 10px;
+}
+
+/* Back Button */
+.leaderboard-container a {
+    display: inline-block;
+    background-color: #00ffffcc;
+    color: #000;
+    font-weight: 600;
+    padding: 10px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    box-shadow: 0 0 15px #00ffff88;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.leaderboard-container a:hover {
+    background-color: #00ffff;
+    box-shadow: 0 0 25px #00ffffdd;
+}
+
+/* Responsive tweaks */
+@media (max-width: 960px) {
+    .difficulty-sections {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .difficulty {
+        width: 100%;
+        max-width: 400px;
+    }
+}
