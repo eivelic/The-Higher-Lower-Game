@@ -97,7 +97,7 @@ def cs_play(request):
     request.session['cs_question_id'] = question.id
 
     correct = int(question.correct_answer)
-    offset = random.randint(1, max(1, int(abs(correct * 0.5))))
+    offset = random.randint(1, max(1, int(abs(correct * 0.15))))
     if random.choice([True, False]):
         given_number = correct + offset
     else:
