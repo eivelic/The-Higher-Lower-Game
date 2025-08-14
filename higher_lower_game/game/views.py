@@ -17,7 +17,17 @@ def nickname_input(request):
 # ---------------------- NOVO: izmjena nadimka ----------------------   
 def reset_nickname(request):
     if request.method == 'POST':
+        # Obriši sve relevantne podatke iz sesije
         request.session.pop('nickname', None)
+        request.session.pop('score', None)
+        request.session.pop('highscore', None)
+        request.session.pop('item1_id', None)
+        request.session.pop('item2_id', None)
+        request.session.pop('cs_score', None)
+        request.session.pop('cs_difficulty', None)
+        request.session.pop('cs_question_id', None)
+        request.session.pop('cs_given_number', None)
+        
         return redirect('nickname_input')
     return redirect('homepage')
 
@@ -82,7 +92,6 @@ def cs_play(request):
             nickname = request.session.get('nickname', 'Anonimac')
             CSLeaderboard.objects.create(nickname=nickname, score=request.session['cs_score'], difficulty=difficulty)
 
-            # Čuvamo samo top 5 po težini
             top_scores = CSLeaderboard.objects.filter(difficulty=difficulty).order_by('-score')
             if top_scores.count() > 5:
                 for s in top_scores[5:]:
@@ -123,6 +132,9 @@ def classic_mode(request):
     if 'score' not in request.session:
         request.session['score'] = 0
 
+    if 'highscore' not in request.session:
+        request.session['highscore'] = 0
+
     if request.method == 'POST':
         guess = request.POST.get('guess')
         item1_id = request.session.get('item1_id')
@@ -142,18 +154,19 @@ def classic_mode(request):
 
         if correct:
             request.session['score'] += 1
+            if request.session['score'] > request.session['highscore']:
+                request.session['highscore'] = request.session['score']
+
             request.session['item1_id'] = item2.id
             available_ids = list(ClassicItem.objects.exclude(id=item2.id).values_list('id', flat=True))
             new_item2_id = random.choice(available_ids)
             request.session['item2_id'] = new_item2_id
 
-            item1 = item2
-            item2 = ClassicItem.objects.get(id=new_item2_id)
-
             return render(request, 'game/classic_mode.html', {
-                'left_item': item1,
-                'right_item': item2,
-                'score': request.session.get('score', 0),
+                'left_item': item2,
+                'right_item': ClassicItem.objects.get(id=new_item2_id),
+                'score': request.session['score'],
+                'highscore': request.session['highscore'],
                 'correct': True
             })
 
@@ -162,7 +175,6 @@ def classic_mode(request):
             nickname = request.session.get('nickname', 'Anonimac')
             ClassicLeaderboard.objects.create(nickname=nickname, score=final_score)
 
-            # Zadrži samo top 5
             top_scores = ClassicLeaderboard.objects.order_by('-score')
             if top_scores.count() > 5:
                 for s in top_scores[5:]:
@@ -174,7 +186,8 @@ def classic_mode(request):
             request.session.modified = True
 
             return render(request, 'game/classic_results.html', {
-                'score': final_score
+                'score': final_score,
+                'highscore': request.session['highscore']
             })
 
     if not request.session.get('item1_id') or not request.session.get('item2_id'):
@@ -182,15 +195,16 @@ def classic_mode(request):
         request.session['item1_id'] = item1.id
         request.session['item2_id'] = item2.id
         request.session['score'] = 0
+
     else:
-        try:
-            item1 = ClassicItem.objects.get(id=request.session['item1_id'])
-            item2 = ClassicItem.objects.get(id=request.session['item2_id'])
-        except ClassicItem.DoesNotExist:
-            return redirect('classic_mode')
+        item1 = ClassicItem.objects.get(id=request.session['item1_id'])
+        item2 = ClassicItem.objects.get(id=request.session['item2_id'])
 
     return render(request, 'game/classic_mode.html', {
         'left_item': item1,
         'right_item': item2,
-        'score': request.session.get('score', 0)
+        'score': request.session['score'],
+        'highscore': request.session['highscore']
     })
+
+
