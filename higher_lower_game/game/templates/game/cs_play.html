@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load humanize %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +11,7 @@
     <div class="cs-container">
         <h1 class="cs-title">CS Mode</h1>
         <p class="cs-question">Pitanje: {{ question.question_text }}</p>
-        <p class="cs-question">Je li pravi odgovor veći ili manji od: <strong>{{ given_number }}</strong>?</p>
+        <p class="cs-question">Je li pravi odgovor veći ili manji od: <strong>{{ given_number|intcomma }}</strong>?</p>
         <p class="cs-score">Trenutni rezultat: {{ score }}</p>
 
         <form method="post" class="cs-answer-buttons">

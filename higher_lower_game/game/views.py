@@ -17,7 +17,6 @@ def nickname_input(request):
 # ---------------------- NOVO: izmjena nadimka ----------------------   
 def reset_nickname(request):
     if request.method == 'POST':
-        # Obriši sve relevantne podatke iz sesije
         request.session.pop('nickname', None)
         request.session.pop('score', None)
         request.session.pop('highscore', None)
@@ -44,7 +43,6 @@ def classic_leaderboard(request):
     return render(request, 'game/classic_leaderboard.html', {'scores': scores})
 
 def cs_leaderboard(request):
-    # Dohvatimo top 5 za svaku težinu posebno
     easy_scores = CSLeaderboard.objects.filter(difficulty='easy').order_by('-score')[:5]
     medium_scores = CSLeaderboard.objects.filter(difficulty='medium').order_by('-score')[:5]
     hard_scores = CSLeaderboard.objects.filter(difficulty='hard').order_by('-score')[:5]

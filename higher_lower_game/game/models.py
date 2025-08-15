@@ -18,7 +18,7 @@ DIFFICULTY_CHOICES = [
 
 class CSQuestion(models.Model):
     question_text = models.TextField()
-    correct_answer = models.CharField(max_length=50)  # spremamo broj kao string
+    correct_answer = models.CharField(max_length=50)
     difficulty = models.CharField(max_length=10, choices=DIFFICULTY_CHOICES)
 
     def __str__(self):
@@ -34,7 +34,7 @@ class ClassicLeaderboard(models.Model):
 class CSLeaderboard(models.Model):
     nickname = models.CharField(max_length=50)
     score = models.IntegerField()
-    difficulty = models.CharField(max_length=10, default='easy')  # 'easy', 'medium', 'hard'
+    difficulty = models.CharField(max_length=10, default='easy')
 
     def __str__(self):
         return f"{self.nickname}: {self.score}"
