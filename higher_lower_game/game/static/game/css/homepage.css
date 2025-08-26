@@ -11,7 +11,7 @@
     top: 0; left: 0;
     width: 100%;
     height: 100vh;
-    background-image: url('../images/homepage_bg.jpg'); /* placeholder slika */
+    background-image: url('../images/homepage_bg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -31,10 +31,9 @@
     padding-bottom: 0;
 }
 
-
 /* Container / Card */
 .homepage-container {
-    background: rgba(0, 0, 0, 0.6); /* poluprozirno crno da se vidi pozadina */
+    background: rgba(0, 0, 0, 0.6);
     border-radius: 12px;
     box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
     max-width: 900px;
@@ -42,7 +41,7 @@
     padding: 40px 50px;
     color: #edf0f1;
     text-align: center;
-    backdrop-filter: blur(5px); /* malo zamućenje iza za bolji kontrast */
+    backdrop-filter: blur(5px);
     flex-grow: 1;
     margin-bottom: 60px; 
 }
@@ -52,52 +51,96 @@
     max-width: 400px;
     width: 100%;
     margin: 0 auto 30px auto;
-        border: 2px solid #ffffff; /* bijeli rub */
-    border-radius: 6px; /* opcionalno – blago zaobljen rub */
+    border: 2px solid #ffffff;
+    border-radius: 6px;
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-
 }
 
-/* Mode List */
-.mode-list {
-    list-style: none;
+/* Mode & Leaderboard Wrapper */
+.mode-leaderboard-wrapper {
     display: flex;
     justify-content: center;
     gap: 40px;
     margin-bottom: 40px;
 }
 
-.mode-list li {
-    background-color: #1a1a1a;
-    border-radius: 12px;
-    padding: 20px 30px;
-    box-shadow: 0 0 12px #00ffff55;
-    transition: box-shadow 0.3s ease;
+.mode-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 }
 
-.mode-list li:hover {
-    box-shadow: 0 0 25px #00ffffcc;
-}
-
+/* Mode link styles */
 .mode-link {
+    padding: 12px 40px;
+    border-radius: 12px;
     font-weight: 600;
     font-size: 20px;
-    color: #ffffff;
     text-decoration: none;
-    display: block;
+    color: #fff;
+    display: inline-block;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); /* Added glow effect for text */
 }
 
-.mode-link-2 {
+/* Specific colors and glow for mode buttons */
+.classic-mode-btn {
+    background-color: #00cccc;
+    box-shadow: 0 0 15px #00ccccaa, 0 0 25px #00cccc88, 0 0 35px #00cccc66; /* Enhanced glow effect */
+}
+
+.cs-mode-btn {
+    background-color: #ff9900;
+    box-shadow: 0 0 15px #ff9900aa, 0 0 25px #ff990088, 0 0 35px #ff990066; /* Enhanced glow effect */
+}
+
+/* Hover effects for mode links */
+.mode-link:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.2);
+    box-shadow: 0 0 20px #ffffffcc, 0 0 30px #ffffff99, 0 0 40px #ffffff66; /* Intensified glow on hover */
+}
+
+/* Leaderboard link styles */
+.leaderboard-link {
+    padding: 12px 40px;
+    border-radius: 12px;
     font-weight: 600;
     font-size: 20px;
-    color: #ffffff;
-    text-decoration: none;
-    display: block;
-    padding-left: 50px;
-    padding-right: 50px;
+    text-decoration: none !important;
+    color: #fff !important;
+    display: inline-block;
+    transition: all 0.3s ease;
 }
 
-/* Rules Box */
+/* Override all link states for leaderboard */
+.leaderboard-link:link,
+.leaderboard-link:visited,
+.leaderboard-link:hover,
+.leaderboard-link:active {
+    text-decoration: none !important;
+    color: #fff !important;
+}
+
+/* Specific colors for leaderboard buttons */
+.classic-leaderboard-btn {
+    background-color: #009999;
+    box-shadow: 0 0 15px #009999aa;
+}
+
+.cs-leaderboard-btn {
+    background-color: #ff6600;
+    box-shadow: 0 0 15px #ff6600aa;
+}
+
+/* Hover effects for leaderboard links */
+.leaderboard-link:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.2);
+}
+
+/* Pravila Box */
 .rules-box {
     background-color: #121212;
     border-radius: 12px;
@@ -105,7 +148,7 @@
     box-shadow: 0 0 20px #00ffff88;
     text-align: left;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 0 auto 40px auto;
 }
 
 .rules-title {
@@ -133,7 +176,7 @@
 .rules-header {
     display: flex;
     align-items: center;
-    gap: 16px; /* razmak između teksta i ikonice */
+    gap: 16px;
     margin-bottom: 10px;
 }
 
@@ -148,52 +191,10 @@
     font-size: 16px;
     line-height: 1.6;
     color: #ffffff;
-}
-
-/* Links hover effect */
-.mode-link:hover {
-    color: #ffffff;
-    transition: color 0.3s ease;
-}
-
-.rules-title,
-.rules-subtitle,
-.mode-link,
-.mode-link-2,
-.rules-text {
     text-shadow: 0 0 6px #ffffffaa;
 }
 
-.site-footer {
-    width: 100%;
-    text-align: center;
-    padding: 20px 0;
-    font-size: 14px;
-    color: #ccc;
-    background-color: rgba(0, 0, 0, 0.7);
-    text-shadow: 0 0 4px #ffffff55;
-}
-
-.mode-leaderboard-wrapper {
-    display: flex;
-    justify-content: center;
-    gap: 40px; /* razmak između stupaca */
-    margin-bottom: 40px;
-}
-
-.mode-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px; /* razmak između gumba i ljestvice */
-}
-
-/* Ako želiš padding za ljestvicu da odgovara gumbu */
-.leaderboard-link.mode-link-2 {
-    padding-left: 50px;
-    padding-right: 50px;
-}
-
+/* Nickname section */
 .nickname-section {
     margin-top: 40px;
     text-align: center;
@@ -208,7 +209,6 @@
     margin-bottom: 15px;
 }
 
-/* Stil za gumb "Promijeni nadimak" */
 .btn-reset-nickname {
     background-color: #00ffffcc;
     border: none;
@@ -226,4 +226,15 @@
 .btn-reset-nickname:hover {
     background-color: #00ffff;
     box-shadow: 0 0 25px #00ffffee;
+}
+
+/* Footer */
+.site-footer {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 14px;
+    color: #ccc;
+    background-color: rgba(0, 0, 0, 0.7);
+    text-shadow: 0 0 4px #ffffff55;
 }
