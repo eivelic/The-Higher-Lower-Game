@@ -79,7 +79,9 @@ def cs_play(request):
         player_choice = request.POST.get('choice')
         question = CSQuestion.objects.get(id=question_id)
         given_number = request.session.get('cs_given_number')
-        correct_answer = int(question.correct_answer)
+
+        # koristi float da podržava i "1.5" i "10"
+        correct_answer = float(question.correct_answer)
 
         if (player_choice == 'higher' and correct_answer > given_number) or \
            (player_choice == 'lower' and correct_answer < given_number):
@@ -88,7 +90,11 @@ def cs_play(request):
         else:
             message = 'Netočno!'
             nickname = request.session.get('nickname', 'Anonimac')
-            CSLeaderboard.objects.create(nickname=nickname, score=request.session['cs_score'], difficulty=difficulty)
+            CSLeaderboard.objects.create(
+                nickname=nickname,
+                score=request.session['cs_score'],
+                difficulty=difficulty
+            )
 
             top_scores = CSLeaderboard.objects.filter(difficulty=difficulty).order_by('-score')
             if top_scores.count() > 5:
@@ -103,8 +109,11 @@ def cs_play(request):
     question = random.choice(questions)
     request.session['cs_question_id'] = question.id
 
-    correct = int(question.correct_answer)
-    offset = random.randint(1, max(1, int(abs(correct * 0.15))))
+    correct = float(question.correct_answer)
+
+    # ✅ offset radi i za decimale (zaokružujemo na cijeli broj jer randint ne prima float)
+    offset = max(1, round(abs(correct * 0.15)))
+
     if random.choice([True, False]):
         given_number = correct + offset
     else:
@@ -113,11 +122,12 @@ def cs_play(request):
     if given_number == correct:
         given_number += 1
 
+    # spremi kao float (može se prikazati zaokruženo u template-u)
     request.session['cs_given_number'] = given_number
 
     return render(request, 'game/cs_play.html', {
         'question': question,
-        'given_number': given_number,
+        'given_number': round(given_number, 2),  # ✅ prikaz max 2 decimale
         'score': request.session.get('cs_score', 0),
     })
 
