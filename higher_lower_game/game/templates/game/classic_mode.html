@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>Classic Mode</title>
-    <link rel="stylesheet" href="{% static 'game/css/classic_mode.css' %}?v=28">
+    <link rel="stylesheet" href="{% static 'game/css/classic_mode.css' %}?v=33">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -14,14 +14,22 @@
         <div class="score">Score: {{ score }}</div>
     </div>
 
-    <!-- wrap za obje kartice (za css) -->
-    <div class="card-container">
+    <div class="card-container" style="position: relative;">
+        <!-- LEFT CARD -->
         <div class="item-card" id="left-card" style="background-image: url('{{ left_item.image.url }}')">
             <h2>{{ left_item.name }}</h2>
             <p>{{ left_item.monthly_searches|intcomma }} pretraga</p>
         </div>
 
-        <div class="item-card" id="right-card" style="background-image: url('{{ right_item.image.url }}')">
+        <!-- FEEDBACK ELEMENT SA SLIKOM -->
+        <div id="feedback" class="feedback">
+            <span id="feedback-icon"></span>
+        </div>
+
+        <!-- RIGHT CARD -->
+        <div class="item-card" id="right-card" style="background-image: url('{{ right_item.image.url }}')"
+             data-left="{{ left_item.monthly_searches|floatformat:2 }}"
+             data-right="{{ right_item.monthly_searches|floatformat:2 }}">
             <h2>{{ right_item.name }}</h2>
             <p>Više ili manje od {{ left_item.name }}?</p>
 
@@ -30,54 +38,96 @@
                 <button type="submit" name="guess" value="higher">Više</button>
                 <button type="submit" name="guess" value="lower">Manje</button>
             </form>
+
+            <!-- Prikaz broja pretraga desnog pojma nakon odgovora -->
+            {% if last_right_searches %}
+            <div class="feedback-searches">
+                <p>{{ right_item.name }} ima {{ last_right_searches|intcomma }} pretraga</p>
+            </div>
+            {% endif %}
         </div>
     </div>
-    <script>
+
+<script>
 document.addEventListener("DOMContentLoaded", function () {
     const cards = document.querySelectorAll('.item-card');
 
-    // FADE IN
+    // FADE IN kartica
     setTimeout(() => {
-        cards.forEach(card => {
-            card.style.opacity = '1';
-        });
+        cards.forEach(card => card.style.opacity = '1');
     }, 50);
 
-    // Dodaj event listener za button-e
+    const feedback = document.getElementById("feedback");
+    const feedbackIcon = document.getElementById("feedback-icon");
+    const rightCard = document.getElementById("right-card");
+    const feedbackSearches = document.querySelector('.feedback-searches');
+
     const buttons = document.querySelectorAll('.item-card button');
 
     buttons.forEach(button => {
-        button.addEventListener('click', function (e) {
+        button.addEventListener('click', function(e){
             e.preventDefault();
 
             const guess = this.value;
             const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
-            // Fade out kartica
+            // IZRAČUN CORRECT LOKALNO
+            const left = parseFloat(rightCard.dataset.left);
+            const right = parseFloat(rightCard.dataset.right);
+            let correct = false;
+            if ((guess === "higher" && right > left) || (guess === "lower" && right < left)) {
+                correct = true;
+            }
+
+            // POSTAVI FEEDBACK S IKONOM
+            if(correct){
+                feedbackIcon.textContent = "✔️";
+                feedbackIcon.classList.add("correct");
+            } else {
+                feedbackIcon.textContent = "❌";
+                feedbackIcon.classList.add("incorrect");
+            }
+            feedback.classList.add("show");
+
+            // Prikaži broj pretraga
+            if(feedbackSearches){
+                feedbackSearches.classList.add('show');
+            }
+
+            // FADE OUT KARTICA
             cards.forEach(card => {
                 card.style.opacity = '0';
             });
 
-            // Nakon 2s submit forme
+            // NAKON 2 SEKUNDE fade-out feedback, zatim submit
             setTimeout(() => {
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.action = "{% url 'classic_mode' %}";
+                feedback.classList.add("fade-out");
+                if(feedbackSearches){
+                    feedbackSearches.classList.remove('show');
+                }
 
-                const csrfInput = document.createElement('input');
-                csrfInput.type = 'hidden';
-                csrfInput.name = 'csrfmiddlewaretoken';
-                csrfInput.value = csrfToken;
+                setTimeout(() => {
+                    feedback.classList.remove("show","fade-out","correct","incorrect");
 
-                const guessInput = document.createElement('input');
-                guessInput.type = 'hidden';
-                guessInput.name = 'guess';
-                guessInput.value = guess;
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = "{% url 'classic_mode' %}";
 
-                form.appendChild(csrfInput);
-                form.appendChild(guessInput);
-                document.body.appendChild(form);
-                form.submit();
+                    const csrfInput = document.createElement('input');
+                    csrfInput.type = 'hidden';
+                    csrfInput.name = 'csrfmiddlewaretoken';
+                    csrfInput.value = csrfToken;
+
+                    const guessInput = document.createElement('input');
+                    guessInput.type = 'hidden';
+                    guessInput.name = 'guess';
+                    guessInput.value = guess;
+
+                    form.appendChild(csrfInput);
+                    form.appendChild(guessInput);
+                    document.body.appendChild(form);
+                    form.submit();
+                }, 500);
             }, 2000);
         });
     });

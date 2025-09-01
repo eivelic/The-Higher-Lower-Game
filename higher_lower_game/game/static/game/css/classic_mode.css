@@ -135,3 +135,60 @@ body.loaded .item-card {
         transform: scale(1);
     }
 }
+
+/* FEEDBACK ELEMENT KVACICA / IKS */
+.feedback {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 6rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 10;
+    text-shadow: 0 0 10px rgba(0,0,0,0.7);
+}
+
+.feedback.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
+.feedback span.correct {
+    color: #4CAF50; /* zelena kvacica */
+}
+
+.feedback span.incorrect {
+    color: #FF5252; /* crveni iks */
+}
+
+/* FADE OUT za kvacicu/iks */
+.feedback.fade-out {
+    animation: fadeOutFeedback 0.5s ease forwards;
+}
+
+@keyframes fadeOutFeedback {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* PRIKAZI SAMO KAD IGRAC ODGOVORI */
+.feedback-searches {
+    text-align: center;
+    color: #fff; 
+    font-size: 20px;
+    margin-top: 10px;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.feedback-searches.show {
+    opacity: 1;
+}
