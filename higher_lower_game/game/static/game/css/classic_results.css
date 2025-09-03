@@ -79,3 +79,44 @@ html, body {
     color: #2575fc;
     box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
+
+/* Osnovni stil za cluster poruku */
+.classic-cluster-msg {
+    font-size: 24px;
+    font-family: 'Arial', sans-serif;
+    margin-top: 15px;
+    border-radius: 12px;
+    padding: 10px 20px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+/* Boje po klasteru */
+.cluster-casual {
+    color: #aaaaaa; /* siva */
+    border: 2px solid #aaaaaa;
+    background-color: rgba(50, 50, 50, 0.4);
+}
+
+.cluster-average {
+    color: #4caf50; /* zelena */
+    border: 2px solid #4caf50;
+    background-color: rgba(76, 175, 80, 0.2);
+}
+
+.cluster-pro {
+    color: #9c27b0; /* ljubičasta */
+    border: 2px solid #9c27b0;
+    background-color: rgba(156, 39, 176, 0.2);
+}
+
+.cluster-master {
+    color: #ffd700; /* zlatna */
+    border: 2px solid #ffd700;
+    background-color: rgba(255, 215, 0, 0.2);
+}
+
+/* Samo naziv klastera uvijek svijetli */
+.classic-cluster-msg span {
+    text-shadow: 0 0 10px currentColor;
+}

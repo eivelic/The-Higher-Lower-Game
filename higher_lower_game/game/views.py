@@ -132,6 +132,15 @@ def cs_play(request):
     })
 
 # ---------------------- POSTOJEĆI: classic_mode uz dodatak leaderboarda ----------------------
+from django.shortcuts import render, redirect
+from .models import ClassicItem, ClassicLeaderboard
+import random
+
+# KMeans
+from sklearn.cluster import KMeans
+import numpy as np
+
+
 def classic_mode(request):
     items = list(ClassicItem.objects.all())
     if len(items) < 2:
@@ -139,7 +148,6 @@ def classic_mode(request):
 
     if 'score' not in request.session:
         request.session['score'] = 0
-
     if 'highscore' not in request.session:
         request.session['highscore'] = 0
 
@@ -183,6 +191,27 @@ def classic_mode(request):
             nickname = request.session.get('nickname', 'Anonimac')
             ClassicLeaderboard.objects.create(nickname=nickname, score=final_score)
 
+            # KMeans clustering
+            scores = list(ClassicLeaderboard.objects.values_list('score', flat=True))
+            scores_array = np.array(scores).reshape(-1, 1)
+
+            if len(scores_array) >= 4:
+                kmeans = KMeans(n_clusters=4, n_init=10, random_state=42)
+                kmeans.fit(scores_array)
+                player_cluster = kmeans.predict([[final_score]])[0]
+
+                cluster_means = {}
+                for i in range(4):
+                    cluster_means[i] = scores_array[kmeans.labels_ == i].mean()
+                sorted_clusters = sorted(cluster_means.items(), key=lambda x: x[1], reverse=True)
+
+                rank_names = ["Master", "Pro", "Average", "Casual"] 
+                cluster_rank = next(idx for idx, (cid, _) in enumerate(sorted_clusters) if cid == player_cluster)
+                cluster_name = rank_names[cluster_rank]
+
+            else:
+                cluster_name = "Premalo igrača"
+
             top_scores = ClassicLeaderboard.objects.order_by('-score')
             if top_scores.count() > 5:
                 for s in top_scores[5:]:
@@ -195,7 +224,8 @@ def classic_mode(request):
 
             return render(request, 'game/classic_results.html', {
                 'score': final_score,
-                'highscore': request.session['highscore']
+                'highscore': request.session['highscore'],
+                'cluster_name': cluster_name  # NOVO
             })
 
     if not request.session.get('item1_id') or not request.session.get('item2_id'):
@@ -203,7 +233,6 @@ def classic_mode(request):
         request.session['item1_id'] = item1.id
         request.session['item2_id'] = item2.id
         request.session['score'] = 0
-
     else:
         item1 = ClassicItem.objects.get(id=request.session['item1_id'])
         item2 = ClassicItem.objects.get(id=request.session['item2_id'])
@@ -214,5 +243,3 @@ def classic_mode(request):
         'score': request.session['score'],
         'highscore': request.session['highscore']
     })
-
-

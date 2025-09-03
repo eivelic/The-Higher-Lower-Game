@@ -31,6 +31,13 @@
             Predobroo!! Znaš što je u trendingu! 
         {% endif %}
     </p>
+
+    <p class="classic-cluster-msg 
+        {% if cluster_name == 'Casual' %}cluster-casual{% elif cluster_name == 'Average' %}cluster-average{% elif cluster_name == 'Pro' %}cluster-pro{% elif cluster_name == 'Master' %}cluster-master{% endif %}">
+        Ovaj pokušaj pripada <span>{{ cluster_name }}</span> skupini igrača!
+    </p>
+
+
     <div class="buttons-container">
         <a href="{% url 'classic_mode' %}">Igraj ponovno</a>
         <a href="{% url 'homepage' %}">Nazad na početak</a>
