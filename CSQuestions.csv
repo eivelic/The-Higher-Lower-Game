@@ -1,0 +1,132 @@
+﻿question_text,correct_answer,difficulty
+Godina izuma mehaničkog kalkulatora (Pascal)?,1642,easy
+Broj bajtova u megabajtu?,1048576,easy
+Broj tipki na standardnoj tipkovnici?,104,easy
+Broj boja koje može prikazati 24-bitni RGB model?,16777216,easy
+Broj bitova u IPv6 adresi?,128,easy
+Prosječna duljina lozinke (u znakovima)?,8,easy
+Broj piksela u Full HD rezoluciji (širina)?,1920,easy
+Koliko milisekundi ima jedna sekunda?,1000,easy
+Broj kilobajta u gigabajtu?,1048576,easy
+Broj boja u 8-bitnoj paleti?,256,easy
+Broj bitova u IPv4 adresi?,32,easy
+Broj osnovnih aritmetičkih operatora u većini programskih jezika?,5,easy
+Broj USB priključaka na standardnom laptopu?,3,easy
+Broj jezika koje podržava Google Translate?,100,easy
+Broj glavnih verzija Android OS-a do 2025. godine?,21,easy
+Godina izuma prvog hard diska?,1956,easy
+Kapacitet prvog USB sticka (u MB)?,8,easy
+Broj tipki na numeričkoj tipkovnici?,17,easy
+Broj izlaznih portova na običnom rutoru?,4,easy
+Broj operacija koje (neznanstveni) kalkulator može izvršiti?,6,easy
+Broj redaka u ASCII tablici?,128,easy
+Godina kada je pokrenut YouTube?,2005,easy
+Broj ljudi koji koristi e-mail (u milijardama)?,4,easy
+Broj rubrika u BIOS-u prosječnog PC-a?,6,easy
+Broj megabita u megabajtu?,8,easy
+Broj znakova u osnovnom ASCII skupu?,128,easy
+Broj godina postojanja Linuxa (2025)?,34,easy
+Broj korisnika interneta u svijetu (milijarde)?,5,easy
+Broj boja u 24-bitnoj boji?,16777216,easy
+Broj operacija koje izvršava CPU po ciklusu?,1,easy
+Broj klasa u osnovnoj Python biblioteci?,200,easy
+Broj funkcija u C standardnoj biblioteci?,100,easy
+Broj vrsta podataka u Javi?,8,easy
+Prosječna brzina tipkanja (slova/min)?,190,easy
+Broj godina postojanja Facebooka (2025)?,21,easy
+Broj piksela u 4K rezoluciji (širina)?,3840,easy
+Broj korisnika TikToka (milijarde)?,1.5,easy
+Broj klikova mišem dnevno (prosječno)?,800,easy
+Broj posjeta Googleu dnevno (milijarde)?,8,easy
+Prosječan broj otvorenih kartica u pregledniku?,8,easy
+Prosječna duljina YouTube videa (minute)?,11,easy
+Broj sekundi za bootanje Android telefona?,30,easy
+Broj mogućih IPv4 adresa?,4294967296,medium
+Godina kada je stvoren virus Creeper?,1971,medium
+Broj redova u Unicode tablici (ver. 15)?,149186,medium
+Broj korisnika Linuxa (milijuni)?,700,medium
+Broj linija koda za Linux kernel?,30000000,medium
+Brzina USB 2.0 (Mbps)?,480,medium
+Broj karaktera u tweetu (maksimalno)?,280,medium
+Broj jezika podržanih u Unicodeu?,150,medium
+Brzina SATA III (Mbps)?,6000,medium
+Broj računalnih instrukcija u RISC-V osnovi?,47,medium
+Broj godina od izuma Interneta (2025)?,56,medium
+Broj redaka koda u Windowsu 10?,50000000,medium
+Prosječna latencija SSD-a (mikrosekundi)?,100,medium
+Broj ljudi zaposlenih u IT sektoru EU?,9000000,medium
+Broj aktivnih domena na internetu?,360000000,medium
+Broj Wi-Fi kanala u 2.4GHz spektru?,14,medium
+Maksimalan broj bajtova u IPv6 paketu?,65535,medium
+Broj godišnjih hakiranja velikih kompanija?,1800,medium
+Broj certifikata za mrežne stručnjake (Cisco)?,25,medium
+Broj AI modela treniranih na ImageNetu?,1500,medium
+Broj web stranica registriranih dnevno?,200000,medium
+Prosječna veličina aplikacije (MB)?,80,medium
+Prosječna veličina RAM memorije (GB)?,8,medium
+Broj portova u TCP/UDP skupu?,65535,medium
+Prosječna brzina 5G interneta (Mbps)?,200,medium
+Godina kada je JavaScript predstavljen?,1995,medium
+Broj Unicode emojija (2024)?,3664,medium
+Broj hakerskih napada po danu globalno?,300000,medium
+Brzina PCIe 3.0 po laneu (GB/s)?,1,medium
+Broj korisnika koji koristi VPN (milijuni)?,1200,medium
+Prosječan broj notifikacija dnevno?,80,medium
+Broj upita na Google u sekundi?,99000,medium
+Broj aplikacija na Google Play Storeu?,2700000,medium
+Broj klasa u Java standardnoj biblioteci?,4000,medium
+Broj izdanja Ubuntua do 2025?,42,medium
+Broj satelita za internetsku vezu (Starlink)?,5000,medium
+Broj aktivnih GitHub repozitorija?,300000000,medium
+Broj linija HTML5 specifikacije?,900,medium
+Broj ljudi koji koristi Windows?,1400000000,medium
+Broj milisekundi potrebnih za render stranice?,200,medium
+Broj korisnika koji koristi Android (milijarde)?,3,medium
+Broj korisnika koji koristi iOS (milijarde)?,1.3,medium
+Brzina Wi-Fi 6 (Mbps)?,9600,medium
+Broj milisekundi odziva DNS-a?,20,medium
+Broj poznatih računalnih jezika?,700,medium
+Prosječna veličina baze podataka (MB)?,500,medium
+Broj godina postojanja Git-a (2025)?,20,medium
+Broj posjeta Wikipediji dnevno?,250000000,medium
+Koliko je godina Alan Turing imao kada je preminuo?,41,hard
+Koliko bitova ima IPv6 adresa?,128,hard
+Koliko tranzistora je imao Intel 4004 procesor?,2300,hard
+Koliko je teška ENIAC mašina u tonama?,27,hard
+Koliko milisekundi traje jedan frame pri 60 FPS?,16,hard
+Koliko znakova maksimalno može imati SHA-256 hash?,64,hard
+Koliko godina je prošlo između izuma interneta i izuma World Wide Weba?,16,hard
+Koliko bita ima jedan kilobajt?,8192,hard
+Koliko bajtova zauzima integer u većini 64-bitnih jezika?,4,hard
+Koliko sekundi ima sat?,3600,hard
+Koliko je maksimalna dužina domene (znakova)?,253,hard
+Koliko maksimalnih prijatelja možete imati na Facebooku?,5000,hard
+Koliko redova koda je imao Windows XP (miliona)?,45,hard
+Koliko aplikacija je bilo na App Storeu 2010. godine?,300000,hard
+Koliko bita ima jedan gigabajt?,8589934592,hard
+Koliko godina je Steve Jobs imao kada je preminuo?,56,hard
+Koliko jezika podržava Google Translate (2024)?,133,hard
+Koliko miliona korisnika ima Reddit (2024)?,850,hard
+Koliko je godina imao Mark Zuckerberg kada je osnovao Facebook?,19,hard
+Koliko MB ima CD disk?,700,hard
+Broj bajtova u IPv6 adresi?,16,hard
+Broj bitova u SHA-256 hashu?,256,hard
+Najveći broj koji se može zapisati s 32-bitnim bezpredznakom cijelim brojem (unsigned int)?,4294967295,hard
+Broj mogućih kombinacija u 8-bitnom binarnom nizu?,256,hard
+Broj registara u MIPS arhitekturi?,32,hard
+Veličina keš linije (cache line) u tipičnom modernom procesoru (u bajtovima)?,64,hard
+Broj mogućih IPv4 adresa?,4294967296,hard
+Broj simbola u standardnom Base64 skupu?,64,hard
+Najveći broj boja u 24-bitnom RGB prikazu?,16777216,hard
+Maksimalni broj otvorenih TCP portova na jednom računalu?,65535,hard
+Broj slojeva u OSI mrežnom modelu?,7,hard
+Veličina stranice memorije (page size) u većini x86 sustava (u bajtovima)?,4096,hard
+Broj mogućih stanja u jednom bajtu?,256,hard
+Broj tipki na standardnoj numeričkoj tipkovnici?,17,hard
+Broj instrukcija u RISC-V osnovnom skupu (RV32I)?,47,hard
+Najveći broj koji se može zapisati sa 16-bitnim bezpredznakom cijelim brojem (unsigned int)?,65535,hard
+Broj Unicode kodnih ravnina (planes)?,17,hard
+Broj bajtova u MAC adresi?,6,hard
+Broj tranzistora u Intel 4004 procesoru?,2300,hard
+Broj razina u TCP/IP modelu?,4,hard
+
